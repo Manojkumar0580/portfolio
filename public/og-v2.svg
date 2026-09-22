@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#131c2c"/>
+  <g stroke="#5e7391" stroke-opacity=".22" stroke-width="1">
+    <path d="M0 90h1200M0 180h1200M0 270h1200M0 360h1200M0 450h1200M0 540h1200"/>
+    <path d="M90 0v630M180 0v630M270 0v630M360 0v630M450 0v630M540 0v630M630 0v630M720 0v630M810 0v630M900 0v630M990 0v630M1080 0v630"/>
+  </g>
+  <rect x="70" y="70" width="168" height="42" fill="#f47856"/>
+  <text x="92" y="98" fill="#111b2b" font-family="Arial,sans-serif" font-size="20" font-weight="700" letter-spacing="2">AVAILABLE</text>
+  <text x="70" y="259" fill="#fffdf9" font-family="Arial,sans-serif" font-size="82" font-weight="700">MANOJ KUMAR</text>
+  <text x="74" y="341" fill="#ffad86" font-family="Arial,sans-serif" font-size="43" font-weight="700">Node.js Backend Developer</text>
+  <path d="M72 405h1055" stroke="#8495ad" stroke-opacity=".65" stroke-width="2"/>
+  <text x="74" y="462" fill="#d6e2ee" font-family="Arial,sans-serif" font-size="27">BACKEND APIS  /  REAL-TIME  /  PAYMENTS  /  AI INTEGRATIONS</text>
+  <rect x="996" y="502" width="130" height="74" fill="#3759ed"/>
+  <text x="1018" y="553" fill="#fffdf9" font-family="Arial,sans-serif" font-size="37" font-weight="700">MK.</text>
+</svg>
