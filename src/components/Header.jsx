@@ -74,7 +74,8 @@ export function Header({ theme, toggleTheme }) {
   }, [active, home]);
 
   return (
-    <header className={scrolled ? 'header scrolled' : 'header'}>
+    <>
+      <header className={scrolled ? 'header scrolled' : 'header'}>
       <div className="container nav">
         <Link className="brand" to="/" aria-label="Manoj Kumar home">
           <img src={profile.portrait} alt="Manoj Kumar" className="brand-mark" style={{ objectFit: 'cover', width: '44px', height: '44px', border: '2px solid rgba(139, 92, 246, 0.4)', padding: '2px', background: '#0f172a' }} />
@@ -104,6 +105,7 @@ export function Header({ theme, toggleTheme }) {
           </button>
         </div>
       </div>
+    </header>
       <div id="mobile-menu" className={open ? 'mobile-menu open' : 'mobile-menu'} aria-hidden={!open}>
         {navItems.map(([label, id]) => (
           <a
@@ -120,6 +122,6 @@ export function Header({ theme, toggleTheme }) {
           <FileText size={16} /> Download resume
         </a>
       </div>
-    </header>
+    </>
   );
 }
