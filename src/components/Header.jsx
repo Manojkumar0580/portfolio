@@ -77,8 +77,8 @@ export function Header({ theme, toggleTheme }) {
     <header className={scrolled ? 'header scrolled' : 'header'}>
       <div className="container nav">
         <Link className="brand" to="/" aria-label="Manoj Kumar home">
-          <span className="brand-mark">M</span>
-          <span>MANOJ KUMAR<small>BACKEND DEVELOPER</small></span>
+          <img src={profile.portrait} alt="Manoj Kumar" className="brand-mark" style={{ objectFit: 'cover', width: '44px', height: '44px', border: '2px solid rgba(139, 92, 246, 0.4)', padding: '2px', background: '#0f172a' }} />
+          <span>MANOJ KUMAR<small>FULL STACK DEVELOPER</small></span>
         </Link>
         <nav className="nav-center" ref={navCenterRef} aria-label="Main navigation">
           <span className="nav-pill" style={pill} aria-hidden="true" />

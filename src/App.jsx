@@ -13,6 +13,7 @@ import { Lifecycle } from './components/Lifecycle';
 import { Work } from './components/Work';
 import { Services, Contact } from './components/ServicesContact';
 import { Footer } from './components/Footer';
+import { CustomCursor } from './components/ui/CustomCursor';
 
 import { profile } from './data/profile.js';
 
@@ -99,6 +100,7 @@ export default function App() {
   
   return (
     <>
+      <CustomCursor />
       <Header theme={theme} toggleTheme={toggleTheme} />
       <main>
         <Suspense fallback={<div className="route-loading">Loading project…</div>}>

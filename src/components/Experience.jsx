@@ -37,34 +37,6 @@ export function Experience() {
               </div>
             </div>
           </Reveal>
-          
-          {/* We could add an Internship timeline item here if data was present, 
-              assuming it's either in the points or we add a hardcoded one for demonstration 
-              as per "Internship-to-full-time progression" requirement. 
-              Let's add it based on the instruction. */}
-          <Reveal className="timeline-item" delay={0.2}>
-            <span className="timeline-dot" aria-hidden="true" />
-            <div className="experience-card" style={{ opacity: 0.85 }}>
-              <div className="experience-card-head">
-                <span className="eyebrow">PREVIOUS</span>
-                <h3>Backend Developer Intern</h3>
-                <p>{experience.company} · {experience.location}</p>
-                <span className="date">Internship Phase</span>
-              </div>
-              <div>
-                <ul>
-                  <li>Started as an intern focusing on Node.js and MongoDB basics.</li>
-                  <li>Assisted in building REST APIs for the initial healthcare MVP.</li>
-                  <li>Learned and implemented payment gateway integration patterns.</li>
-                </ul>
-                <div className="exp-tech">
-                  {['Node.js', 'Express', 'Postman', 'Git'].map(t => (
-                    <span key={t}>{t}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </Reveal>
         </div>
         
         <Reveal as="div" stagger className="credentials">

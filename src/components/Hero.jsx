@@ -1,12 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowUpRight, ArrowRight, FileText, Github, Linkedin, Mail } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, FileText, Github, Linkedin, Mail, Smartphone, Server, Database, Layers, Activity, CreditCard, Cloud, Shield, GitBranch, Zap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { profile, metrics } from '../data/profile.js';
 
 export function Hero() {
-  const areas = ['Node.js Backend Developer', 'MERN Stack Developer', 'Full-Stack Developer'];
+  const areas = ['Node.js Developer', 'MERN Stack Developer', 'Full-Stack Developer'];
   const [area, setArea] = useState(0);
   const heroRef = useRef(null);
+
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [activeLog, setActiveLog] = useState(null);
+
+  const nodeLogs = {
+    Client: { time: "[REQ]", type: "200", text: "GET /api/v1/dashboard from Mobile Client", color: "log-success" },
+    Auth: { time: "[SEC]", type: "OK", text: "JWT Signature verified for user_id=4091", color: "log-info" },
+    MongoDB: { time: "[DB]", type: "200", text: "Index scan completed in 14ms (1240 docs)", color: "log-success" },
+    AWS: { time: "[CLOUD]", type: "INFO", text: "S3 Bucket sync completed successfully", color: "log-info" },
+    Redis: { time: "[CACHE]", type: "HIT", text: "Session token retrieved (2ms)", color: "log-info" },
+    Payments: { time: "[PAY]", type: "200", text: "Stripe Webhook: charge.succeeded verified", color: "log-success" },
+    "CI/CD": { time: "[GIT]", type: "OK", text: "Deploy preview built successfully in 45s", color: "log-info" },
+    Sockets: { time: "[WS]", type: "INFO", text: "Client connected to namespace /chat", color: "log-info" }
+  };
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -19,8 +33,11 @@ export function Hero() {
     if (!node || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const onMove = e => {
       const rect = node.getBoundingClientRect();
-      node.style.setProperty('--mx', `${((e.clientX - rect.left) / rect.width * 100).toFixed(1)}%`);
-      node.style.setProperty('--my', `${((e.clientY - rect.top) / rect.height * 100).toFixed(1)}%`);
+      const xPercent = (e.clientX - rect.left) / rect.width;
+      const yPercent = (e.clientY - rect.top) / rect.height;
+      node.style.setProperty('--mx', `${(xPercent * 100).toFixed(1)}%`);
+      node.style.setProperty('--my', `${(yPercent * 100).toFixed(1)}%`);
+      setMousePos({ x: xPercent - 0.5, y: yPercent - 0.5 });
     };
     node.addEventListener('mousemove', onMove);
     return () => node.removeEventListener('mousemove', onMove);
@@ -85,30 +102,139 @@ export function Hero() {
         </motion.div>
         
         <motion.div 
-          className="hero-visual" 
+          className="hero-visual architecture-visual" 
           aria-hidden="true"
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="window-bar">
-            <i /><i /><i />
-            <span>server.js</span>
-            <div className="window-bar-avatar">
-              <img src={profile.portrait} alt="" width="56" height="56" loading="lazy" />
+          <div className="orbital-wrapper">
+            <div className="orbital-container">
+            {/* Center Node */}
+            <div className="orbit-center">
+              <motion.div 
+                className="orbit-pulse"
+                animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+              <Server size={32} color="#8b5cf6" />
+              <span>API Gateway</span>
             </div>
+
+            {/* Orbit Ring */}
+            <div className="orbit-ring">
+              
+              {/* Orbiting Nodes (8 total) */}
+              <div className="orbit-node node-1" onMouseEnter={() => setActiveLog(nodeLogs['Client'])} onMouseLeave={() => setActiveLog(null)}>
+                <motion.div animate={{ x: [0, 3, -2, 0], y: [0, -4, 2, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <div className="orbit-icon-wrap client-glow">
+                    <Smartphone size={20} color="#60a5fa" />
+                  </div>
+                  <span>Client</span>
+                </motion.div>
+              </div>
+              
+              <div className="orbit-node node-2" onMouseEnter={() => setActiveLog(nodeLogs['Auth'])} onMouseLeave={() => setActiveLog(null)}>
+                <motion.div animate={{ x: [0, -3, 4, 0], y: [0, 2, -3, 0] }} transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut" }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <div className="orbit-icon-wrap auth-glow">
+                    <Shield size={20} color="#ec4899" />
+                  </div>
+                  <span>Auth</span>
+                </motion.div>
+              </div>
+              
+              <div className="orbit-node node-3" onMouseEnter={() => setActiveLog(nodeLogs['MongoDB'])} onMouseLeave={() => setActiveLog(null)}>
+                <motion.div animate={{ x: [0, 4, 2, 0], y: [0, -3, 4, 0] }} transition={{ duration: 3.8, repeat: Infinity, ease: "easeInOut" }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <div className="orbit-icon-wrap db-glow">
+                    <Database size={20} color="#10b981" />
+                  </div>
+                  <span>MongoDB</span>
+                </motion.div>
+              </div>
+              
+              <div className="orbit-node node-4" onMouseEnter={() => setActiveLog(nodeLogs['AWS'])} onMouseLeave={() => setActiveLog(null)}>
+                <motion.div animate={{ x: [0, -4, 3, 0], y: [0, 4, -2, 0] }} transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <div className="orbit-icon-wrap cloud-glow">
+                    <Cloud size={20} color="#0ea5e9" />
+                  </div>
+                  <span>AWS</span>
+                </motion.div>
+              </div>
+
+              <div className="orbit-node node-5" onMouseEnter={() => setActiveLog(nodeLogs['Redis'])} onMouseLeave={() => setActiveLog(null)}>
+                <motion.div animate={{ x: [0, 2, -4, 0], y: [0, -4, -1, 0] }} transition={{ duration: 3.9, repeat: Infinity, ease: "easeInOut" }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <div className="orbit-icon-wrap cache-glow">
+                    <Layers size={20} color="#ef4444" />
+                  </div>
+                  <span>Redis</span>
+                </motion.div>
+              </div>
+              
+              <div className="orbit-node node-6" onMouseEnter={() => setActiveLog(nodeLogs['Payments'])} onMouseLeave={() => setActiveLog(null)}>
+                <motion.div animate={{ x: [0, -3, 2, 0], y: [0, 3, 4, 0] }} transition={{ duration: 4.1, repeat: Infinity, ease: "easeInOut" }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <div className="orbit-icon-wrap pay-glow">
+                    <CreditCard size={20} color="#f59e0b" />
+                  </div>
+                  <span>Payments</span>
+                </motion.div>
+              </div>
+
+              <div className="orbit-node node-7" onMouseEnter={() => setActiveLog(nodeLogs['CI/CD'])} onMouseLeave={() => setActiveLog(null)}>
+                <motion.div animate={{ x: [0, 4, -2, 0], y: [0, -2, -4, 0] }} transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <div className="orbit-icon-wrap git-glow">
+                    <GitBranch size={20} color="#f97316" />
+                  </div>
+                  <span>CI/CD</span>
+                </motion.div>
+              </div>
+
+              <div className="orbit-node node-8" onMouseEnter={() => setActiveLog(nodeLogs['Sockets'])} onMouseLeave={() => setActiveLog(null)}>
+                <motion.div animate={{ x: [0, -4, 3, 0], y: [0, -4, 2, 0] }} transition={{ duration: 4.3, repeat: Infinity, ease: "easeInOut" }} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                  <div className="orbit-icon-wrap ws-glow">
+                    <Zap size={20} color="#eab308" />
+                  </div>
+                  <span>Sockets</span>
+                </motion.div>
+              </div>
+            </div>
+            
+            {/* Data particles flying to center */}
+            <svg className="orbit-particles" viewBox="0 0 200 200">
+              <motion.circle r="3" fill="#60a5fa" animate={{ cx: [20, 100], cy: [100, 100], opacity: [0, 1, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }} />
+              <motion.circle r="3" fill="#10b981" animate={{ cx: [180, 100], cy: [100, 100], opacity: [0, 1, 0] }} transition={{ duration: 1.5, delay: 0.7, repeat: Infinity, ease: "linear" }} />
+              <motion.circle r="3" fill="#ef4444" animate={{ cx: [100, 100], cy: [20, 100], opacity: [0, 1, 0] }} transition={{ duration: 1.5, delay: 0.3, repeat: Infinity, ease: "linear" }} />
+              <motion.circle r="3" fill="#f59e0b" animate={{ cx: [100, 100], cy: [180, 100], opacity: [0, 1, 0] }} transition={{ duration: 1.5, delay: 1.1, repeat: Infinity, ease: "linear" }} />
+              <motion.circle r="3" fill="#ec4899" animate={{ cx: [45, 100], cy: [45, 100], opacity: [0, 1, 0] }} transition={{ duration: 1.5, delay: 0.5, repeat: Infinity, ease: "linear" }} />
+              <motion.circle r="3" fill="#0ea5e9" animate={{ cx: [155, 100], cy: [155, 100], opacity: [0, 1, 0] }} transition={{ duration: 1.5, delay: 0.9, repeat: Infinity, ease: "linear" }} />
+            </svg>
           </div>
-          <div className="code-block">
-            <div><span className="ln">01</span><span className="kw">const</span> engineer = {'{'}</div>
-            <div><span className="ln">02</span>&nbsp;&nbsp;name: <span className="str">'Manoj Kumar'</span>,</div>
-            <div><span className="ln">03</span>&nbsp;&nbsp;role: <span className="str">'Node.js Backend Developer'</span>,</div>
-            <div><span className="ln">04</span>&nbsp;&nbsp;experience: <span className="str">'{metrics[0][0]} years'</span>,</div>
-            <div><span className="ln">05</span>&nbsp;&nbsp;stack: [<span className="str">'Express'</span>, <span className="str">'MongoDB'</span>, <span className="str">'React'</span>],</div>
-            <div><span className="ln">06</span>&nbsp;&nbsp;<span className="fn">ship</span>: () =&gt; <span className="kw">true</span></div>
-            <div><span className="ln">07</span>{'}'}; <span className="cm">// building Doctar right now</span></div>
           </div>
+          
+          <div className="arch-logs" style={{ height: '150px', display: 'flex', flexDirection: 'column' }}>
+            <div className="arch-logs-header">
+              <Activity size={12} color="#8b5cf6" /> Server Terminal
+            </div>
+            {activeLog ? (
+              <motion.div className="arch-log-line" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }}>
+                <span className="log-time">{activeLog.time}</span> <span className={activeLog.color}>{activeLog.type}</span> {activeLog.text}
+              </motion.div>
+            ) : (
+              <>
+                <motion.div className="arch-log-line" animate={{ opacity: [0.5, 1] }} transition={{ repeat: Infinity, duration: 2 }}>
+                  <span className="log-time">[API]</span> <span className="log-info">INFO</span> System initialized properly
+                </motion.div>
+                <motion.div className="arch-log-line" animate={{ opacity: [0.5, 1] }} transition={{ repeat: Infinity, duration: 1.5, delay: 0.5 }}>
+                  <span className="log-time">[DB]</span> <span className="log-success">200</span> Database connection established
+                </motion.div>
+                <motion.div className="arch-log-line" animate={{ opacity: [0.5, 1] }} transition={{ repeat: Infinity, duration: 2.5, delay: 1.2 }}>
+                  <span className="log-time">[CACHE]</span> <span className="log-info">HIT</span> Redis cluster ready
+                </motion.div>
+              </>
+            )}
+          </div>
+          
           <div className="hero-stack-strip">
-            {['Node.js', 'Express.js', 'MongoDB', 'React.js', 'JWT', 'Razorpay'].map(t => (
+            {['Microservices', 'REST APIs', 'WebSockets', 'Node.js', 'MongoDB', 'Redis'].map(t => (
               <span key={t}>{t}</span>
             ))}
           </div>

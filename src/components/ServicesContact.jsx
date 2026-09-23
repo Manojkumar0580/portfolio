@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ArrowUpRight, Mail, Linkedin, Github, Send, Check } from 'lucide-react';
 import { SectionTitle } from './ui/SectionTitle';
 import { Reveal } from './ui/Reveal';
+import { SpotlightCard } from './ui/SpotlightCard';
 import { profile, services } from '../data/profile.js';
 import { sendInquiry } from '../services/api.js';
 
@@ -18,12 +19,12 @@ export function Services() {
         
         <Reveal as="div" stagger className="services-grid">
           {services.map(([title, description], i) => (
-            <div className="service" key={title}>
+            <SpotlightCard className="service" key={title}>
               <span className="service-index">0{i + 1}</span>
               <h3>{title}</h3>
               <p>{description}</p>
               <ArrowUpRight size={21} />
-            </div>
+            </SpotlightCard>
           ))}
         </Reveal>
       </div>
